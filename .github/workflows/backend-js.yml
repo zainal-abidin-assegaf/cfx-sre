@@ -85,6 +85,7 @@ jobs:
       working-directory: backend-js/deployment/production
       run: |
         kubectl kustomize . > rendered.yaml
+        cat rendered.yaml
 
     - name: Validate
       working-directory: backend-js/deployment/production

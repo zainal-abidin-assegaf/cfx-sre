@@ -10,7 +10,8 @@ metadata:
     alb.ingress.kubernetes.io/ssl-redirect: '443'
 spec:
   rules:
-    - http:
+    - host: example.com
+      http:
         paths:
           - path: /
             pathType: Prefix
