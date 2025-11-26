@@ -1,0 +1,39 @@
+name: Deploy Backend JS
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "backend-js/**"
+  pull_request:
+    paths:
+      - "backend-js/**"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+  build:
+    runs-on: ubuntu-latest
+    needs: ["test"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      
+      - name: Build Docker image
+        run: docker build -t backend-js:latest .
+        working-directory: backend-js
