@@ -73,6 +73,10 @@ jobs:
       uses: actions/checkout@v5
 
     - uses: imranismail/setup-kustomize@v2
+      
+    - name: Get short SHA
+      id: vars
+      run: echo "SHA_SHORT=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_OUTPUT
 
     - name: Edit manifest
       working-directory: backend-go/deployment/production
