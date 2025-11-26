@@ -81,7 +81,7 @@ helm repo add grafana https://grafana.github.io/helm-charts
 helm install loki grafana/loki --version 6.46.0
 ```
 
-install promtail for uploading application logs to loki
+install promtail for sending application logs to loki
 ```
 helm repo add grafana https://grafana.github.io/helm-charts
 
