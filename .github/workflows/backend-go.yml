@@ -94,3 +94,20 @@ jobs:
       working-directory: backend-go/deployment/production
       run: |
         kubeconform -strict -ignore-missing-schemas -summary rendered.yaml
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v5
+      with:
+        role-to-assume: arn:aws-cn:iam::123456789100:role/github-actions-role
+        aws-region: ap-southeast-3
+
+    - name: Update kubeconfig
+      run: |
+        aws eks update-kubeconfig \
+          --name production \
+          --region ap-southeast-3
+        
+    - name: Apply
+      working-directory: backend-go/deployment/production
+      run: |
+        kubectl apply -k .
