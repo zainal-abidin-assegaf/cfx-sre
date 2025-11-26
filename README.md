@@ -1,4 +1,4 @@
-# 
+# CFX-SRE 
 
 This repository contains two backend applications (Golang and Node.js) and their Kubernetes deployment manifests. It also includes a CI/CD pipeline using GitHub Actions to automate testing, building, and deployment.
 
@@ -43,6 +43,7 @@ Runs unit tests and verifies the code quality.
 
 ### Build Docker Image
 Builds Docker images for the backend applications.
+The Docker images are pushed to GitHub Container Registry (GHCR) for use in Kubernetes deployments.
 
 ### Deploy to Kubernetes
 Deploys the applications to the Kubernetes cluster using manifests from the `kustomize/` folder.
@@ -52,7 +53,7 @@ Kustomize is used to simplify manifest management.
 
 - The applications are deployed to AWS EKS.
 
-- GitHub Actions authenticates with AWS using an OIDC role for secure access.
+- GitHub Actions authenticates with AWS using an OIDC role `arn:aws-cn:iam::123456789100:role/github-actions-role` for secure access.
 
 - Manifests are managed with Kustomize for environment-specific overlays and simplified deployment.
 
